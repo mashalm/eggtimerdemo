@@ -43,11 +43,11 @@ module TimerController(clk, reset, set, startStop, isTimeFlat,
 	always @ (state) begin
 		case(state)
 			Reset: begin
-				flashEn <= 1'b0;
-				decEn <= 1'b0;
-				timeWrtEn <= 1'b0;
-				initValEn <= 1'b0;
-				minEn <= 1'b0;
+				flashEn <= 1'b0; //for flashing
+				decEn <= 1'b0; //for decrementing
+				timeWrtEn <= 1'b0; //for writing to timereg
+				initValEn <= 1'b0; //for writing to decrementer
+				minEn <= 1'b0; //for writing to mins in timereg
 			end
 			SetSec: begin
 				flashEn <= 1'b0;

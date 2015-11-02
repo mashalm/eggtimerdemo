@@ -9,10 +9,10 @@ module DecrementTime(clk, reset, wrtEn, decEn, minsSecsIn,
 	
 	always @ (posedge clk) begin
 		if(reset == 1'b1) begin
-			secOnes <= 4'b0000;
-			secTens <= 4'b0000;
-			minOnes <= 4'b0000;
-			minTens <= 4'b0000;
+			secOnes <= 4'h0;
+			secTens <= 4'h0;
+			minOnes <= 4'h0;
+			minTens <= 4'h0;
 		end
 		else if(wrtEn == 1'b1) begin
 		//read input otherwise ignore
@@ -29,10 +29,10 @@ module DecrementTime(clk, reset, wrtEn, decEn, minsSecsIn,
 				if(secTens == 4'h0) begin
 					secTens <= 4'h5;
 					//nine is already set above
-					minOnes <= minOnes - 4'b0001;
+					minOnes <= minOnes - 4'h1;
 					if(minOnes == 4'h0) begin
 						minOnes <= 4'h9;
-						minTens <= minTens - 4'b0001;
+						minTens <= minTens - 4'h1;
 						if(minTens == 4'h0) begin //everything is zero
 							minOnes <= 4'h0;
 							minTens <= 4'h0;

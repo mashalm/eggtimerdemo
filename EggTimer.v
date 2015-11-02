@@ -18,7 +18,7 @@ module EggTimer(CLOCK_50, KEY, SW, HEX3, HEX2, HEX1, HEX0, LEDR);
 	
 	//clock divider for decrementer:
 	wire oneSecClock;
-	ClockDivider #(33000000) dcd(clk, oneSecClock);
+	ClockDivider #(30000000) dcd(clk, oneSecClock);
 	
 	//clock divider for flasher:
 	wire halfSecClock;
@@ -26,7 +26,7 @@ module EggTimer(CLOCK_50, KEY, SW, HEX3, HEX2, HEX1, HEX0, LEDR);
 	
 	//declare required wires
 	wire [3:0] secOnes, secTens, minOnes, minTens;
-	wire isTimeFlat = (secOnes + secTens + minOnes + minTens == 0) ? 1 : 0;
+	wire isTimeFlat = ({secOnes, secTens, minOnes, minTens} == 0) ? 1 : 0;
 	//controller outputs:
 	wire flashEn, decEn, timeWrtEn, initDecEn, minEn;	
 	TimerController tc(clk, reset, set, startStop, isTimeFlat, 

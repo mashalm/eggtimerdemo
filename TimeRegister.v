@@ -14,7 +14,7 @@ module TimeRegister(clk, reset, wrtEn, minEn, dIn, dOut);
 				if(minEn == 1'b1) dOut[15:8] <= dIn;
 				else dOut[7:0] <= dIn;
 			end
-		end	
+		end
 	end
 
 endmodule
