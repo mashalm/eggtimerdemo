@@ -34,10 +34,13 @@ module EggTimer(CLOCK_50, KEY, SW, HEX3, HEX2, HEX1, HEX0, LEDR);
 	
 	wire[15:0] initMinsSecs;
 	TimeRegister tr(clk, reset, timeWrtEn, minEn, SW, initMinsSecs);
-
-	DecrementTime dt(oneSecClock, reset, initDecEn, decEn, initMinsSecs, 
-		secOnes, secTens, minOnes, minTens);
 	
+	wire[15:0] validInitMinsSecs;
+	SwitchValidator sv(clk, initMinsSecs, validInitMinsSecs);
+
+	DecrementTime dt(oneSecClock, reset, initDecEn, decEn, validInitMinsSecs, 
+		secOnes, secTens, minOnes, minTens);
+
 	FlashLights fl(clk, flashEn & halfSecClock, LEDR);
 
 	dec2_7seg d1(secOnes, HEX0);
